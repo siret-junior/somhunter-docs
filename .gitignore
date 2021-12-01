@@ -16,6 +16,7 @@
 *.snm
 pdfa.xmpi
 *.pdf
+!specification/specification.pdf
 *.idx
 *.ind
 
