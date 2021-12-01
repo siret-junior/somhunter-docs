@@ -1,0 +1,120 @@
+
+\newcommand{\cool}{\color{green!50!white!80!black}}
+\newcommand{\textcool}[1]{{\cool #1}}
+
+\newcommand{\XX}[1]{\textcolor{red}{#1}}
+\newcommand{\TT}[1]{\texttt{#1}}
+\newcommand{\SC}[1]{{\fontfamily{phv}\selectfont\textsc{#1}}}
+
+% Draw black "slugs" whenever a line overflows, so that we can spot it easily.
+
+
+% avoid some slugs naturally
+\clubpenalty=1000
+\widowpenalty=1000
+%\hyphenpenalty=100  % turn this on to prevent hyphenation
+\emergencystretch=2cm
+
+
+%%% The field of all real and natural numbers
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\bms}{\begin{enumerate}[label=\bf (M\arabic*)]}
+\newcommand{\bwp}{\begin{enumerate}[label=\bf \normalsize  (WP\arabic*), resume=del]}
+\newcommand{\eenum}{\end{enumerate}}
+\newcommand{\itemm}{\large \item }
+\newcommand{\itemwp}{ \normalsize \item }
+\newcommand{\deadline}[2]{\small (deadline: \textit{month #1}, duration: \textit{#2 moths})}
+\newcommand{\people}[1]{\textit{\small (#1)}}
+
+
+% move the headings out of gutenberg era
+\setcounter{secnumdepth}{4}
+\titleformat{\chapter}{\cool\fontsize{24pt}{24pt}\bfseries}{\color{black!25}\thechapter.}{1em}{}
+\titleformat{\section}{\cool\fontsize{16pt}{18pt}\bfseries}{\scriptsize\color{black!25}\thesection}{1em}{}
+\titleformat{\subsection}{\cool\fontsize{12pt}{14pt}\bfseries}{\scriptsize\color{black!25}\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\cool\bfseries}{\scriptsize\color{black!25}\thesubsubsection}{1em}{}
+
+% code floats
+\colorlet{shadecolor}{cyan!10}
+\makeatletter
+\newcommand\floatc@code[2]{{\@fs@cfont #1} #2\par}
+\newcommand\fs@code{\def\@fs@cfont{\bfseries}\let\@fs@capt\floatc@code
+\def\@fs@pre{}%
+\def\@fs@mid{\vspace{-.5ex}\begin{shaded}}%
+\def\@fs@post{\vspace{-1em}\end{shaded}}%
+\let\@fs@iftopcapt\iftrue}
+\makeatother
+
+\floatstyle{code}
+\newfloat{listing}{tbp}{lst}
+\floatname{listing}{Listing}
+
+% file indexing
+\makeatletter
+\def\patheach#1#2#3{\@test@patheachF{#1}{#2}#3/\endgroup}
+\def\@test@patheachF#1#2#3\endgroup{\if#3\empty\empty\else\@patheachF{#1}{#2}#3\endgroup\fi}
+\def\@patheachF#1#2#3/{#1{#3}\@test@patheach{#1}{#2}}
+\def\@test@patheach#1#2#3\endgroup{\if#3\empty\empty\else\@patheach{#1}{#2}#3\endgroup\fi}
+\def\@patheach#1#2#3/{#2#1{#3}\@test@patheach{#1}{#2}}
+\def\foreach#1#2{\@test@foreach{#1}#2,\endgroup}
+\def\@test@foreach#1#2\endgroup{\if#2\empty\empty\else\@foreach{#1}#2\endgroup\fi}
+\def\@foreach#1#2,{#1{#2}\@test@foreach{#1}}
+\makeatother
+
+\def\makefileindex#1{%
+\index{\patheach{\texttt}{!}{#1}}%
+\hspace{-1ex}\texttt{\patheach{}{/\-}{#1}}\\}
+
+\def\makefileindexnotext#1{%
+	\index{\patheach{\texttt}{!}{#1}}}
+
+\def\makefileindexes#1{\foreach{\makefileindex}{#1}}
+
+\newcommand{\srcstyle}[1]{\tt\scriptsize\textcolor{gray}{\makefileindexes{#1}}}
+\newcommand{\sectionFiles}[2]{ \strut~\hfill~\hspace{1ex}~\parbox{#1}{\tt\scriptsize\textcolor{gray}{\makefileindexes{#2}}}}
+
+\newcommand{\chapterSrc}[3][.4\linewidth]{\chapter[#2]{#2\sectionFiles{#1}{#3}}}
+\newcommand{\sectionSrc}[3][.4\linewidth]{\section[#2]{#2\sectionFiles{#1}{#3}}}
+\newcommand{\subsectionSrc}[3][.4\linewidth]{\subsection[#2]{#2\sectionFiles{#1}{#3}}}
+\newcommand{\subsubsectionSrc}[3][.4\linewidth]{\subsubsection[#2]{#2\sectionFiles{#1}{#3}}}
+
+% index typesetting customization
+\renewcommand\indexname{Source file documentation index}
+\providecommand*\lettergroup[1]{}
+\makeatletter
+\newcommand\idxitem{\@idxitem}
+\newcommand\idxIitem{\@idxitem\texttt{.\ }}
+\newcommand\idxIIitem{\@idxitem\texttt{.\ .\ }}
+\newcommand\idxIIIitem{\@idxitem\texttt{.\ .\ .\ }}
+\newcommand\idxIIIIitem{\@idxitem\texttt{.\ .\ .\ .\ }}
+\newcommand\idxIIIIIitem{\@idxitem\texttt{.\ .\ .\ .\ .\ }}
+\makeatother
+
+% Include large PDFs
+\newenvironment{foldoutfloat}{%
+	\eject\pdfpageheight=52cm\pdfpagewidth=40cm
+	\newgeometry{margin=1in}
+	\textwidth=15in
+	\begin{figure}[p]
+	}{%
+	\end{figure}
+	\clearpage % otherwise it will float to another, non-resized page
+	\eject\pdfpageheight=11in\pdfpagewidth=8.5in
+	\restoregeometry
+}
+
+\newenvironment{foldoutfloatlandscape}{%
+	\eject\pdfpageheight=40cm\pdfpagewidth=52cm
+	\newgeometry{margin=1in}
+	\textwidth=15in
+	\begin{figure}[p]
+	}{%
+	\end{figure}
+	\clearpage % otherwise it will float to another, non-resized page
+	\eject\pdfpageheight=11in\pdfpagewidth=8.5in
+	\restoregeometry
+}%

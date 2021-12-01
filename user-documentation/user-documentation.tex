@@ -1,0 +1,91 @@
+%%% The main file. It contains definitions of basic parameters and includes all other parts.
+
+
+%% Settings for two-sided (duplex) printing
+\documentclass[10pt,a4paper]{article}
+\let\openright=\cleardoublepage
+
+%% Character encoding: usually latin2, cp1250 or utf8:
+\usepackage[utf8]{inputenc}
+
+%% It's 2019
+\usepackage[default]{droidserif}
+\usepackage[T1]{fontenc}
+
+%% Further useful packages (included in most LaTeX distributions)
+\usepackage{amsmath}        % extensions for typesetting of math
+\usepackage{amsfonts}       % math fonts
+\usepackage{graphicx}       % embedding of pictures
+\usepackage{tikz}
+%\usetikzlibrary{shapes,fit,positioning,snakes,mindmap,trees,decorations.text,arrows.meta}
+%\makenomenclature
+\usepackage{algorithm,algpseudocode}
+\usepackage{booktabs}
+\usepackage{mwe}
+\usepackage{afterpage}
+\usepackage{pgfgantt}
+\usepackage{pdflscape}
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{framed}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{longtable}
+\usepackage{makecell}
+\usepackage[toc,page]{appendix}
+\usepackage{multirow}
+\usepackage{tocbibind}
+\usepackage{etoolbox}
+\usepackage{fancyvrb}
+\usepackage{animate}
+
+\lstset{basicstyle=\ttfamily,
+	showstringspaces=false,
+	commentstyle=\color{red},
+	keywordstyle=\color{blue}
+}
+
+\usepackage{pdfpages}
+
+\usepackage[textsize=tiny,backgroundcolor=yellow!50, linecolor=black!25]{todonotes}
+
+% links shall be clickable
+\usepackage[unicode]{hyperref}   % Must follow all other packages
+\usepackage{cleveref} % Must follow all other packages including hyperref
+\AtBeginEnvironment{appendices}{\crefalias{chapter}{appendix}}
+
+% indexing
+\usepackage{makeidx}
+\makeindex
+\usepackage[totoc, columns=1]{idxlayout}
+\include{macros}
+
+\title{\textcool{\bf SOMHunter Video Search Tool} \\ User Documentation}
+\author{František Mejzlík, Vít Škrhák, Patrik Veselý}
+\date{Supervisor: doc. RNDr. Jakub Lokoč, Ph.D. \\ \vspace{5mm} Consultant: Mgr. Ladislav Peška, Ph.D.}
+
+% Title page and various mandatory informational pages
+\begin{document}
+\maketitle
+\pagebreak
+%%% A page with automatically generated table of contents of the bachelor thesis
+\tableofcontents
+
+%%% Each chapter is kept in a separate file
+
+\input{preface}
+
+\input{start}
+
+\bibliography{biblio} 
+\bibliographystyle{apalike}
+
+\printindex
+\begin{appendices}
+
+\end{appendices}
+
+
+\end{document}

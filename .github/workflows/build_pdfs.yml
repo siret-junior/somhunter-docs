@@ -1,0 +1,43 @@
+name: Build LaTeX document
+on: [push]
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up GIT repository
+        uses: actions/checkout@v1
+
+      # Specification
+      - name: Upload specification
+        uses: actions/upload-artifact@v1
+        with:
+          name: Specification
+          path: specification/specification.pdf
+
+      # TODO: Add the project conclusion discussion
+
+      # Developer docs
+      - name: Compile developer documentation
+        uses: xu-cheng/latex-action@master
+        with:
+          root_file: dev-documentation.tex
+          working_directory: dev-documentation
+
+      - name: Upload developer documentation
+        uses: actions/upload-artifact@v1
+        with:
+          name: Developer documentation
+          path: dev-documentation/dev-documentation.pdf
+
+      # User docs
+      - name: Compile user documentation
+        uses: xu-cheng/latex-action@master
+        with:
+          root_file: user-documentation.tex
+          working_directory: user-documentation
+
+      - name: Upload user documentation
+        uses: actions/upload-artifact@v1
+        with:
+          name: User documentation
+          path: user-documentation/user-documentation.pdf
