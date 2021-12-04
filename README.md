@@ -13,8 +13,8 @@ Or get prebuilt one:
 ```sh
 docker pull aergus/latex
 ```
-
-After that, you should be able to compile the PDFs with these :
+## Building with the container
+Now you should be able to compile the PDFs with these :
 ```sh
 docker run -u $UID -ti --rm -v ${PWD}:/workdir -w /workdir somhunter-docs/latex make
 # OR
