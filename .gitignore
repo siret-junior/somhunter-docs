@@ -19,5 +19,7 @@ pdfa.xmpi
 !specification/specification.pdf
 *.idx
 *.ind
+*.fls
+*.fdb*
 
 !**/img/*
