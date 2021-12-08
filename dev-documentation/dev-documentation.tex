@@ -39,6 +39,7 @@
 \usepackage{tocbibind}
 \usepackage{etoolbox}
 \usepackage{fancyvrb}
+\usepackage[font=small,labelfont=bf]{caption}
 
 \lstset{basicstyle=\ttfamily,
 	showstringspaces=false,
@@ -52,7 +53,8 @@
 
 % links shall be clickable
 \usepackage[unicode]{hyperref}   % Must follow all other packages
-\usepackage{cleveref} % Must follow all other packages including hyperref
+%\usepackage{cleveref} % Must follow all other packages including hyperref
+\usepackage[noabbrev]{cleveref}
 \AtBeginEnvironment{appendices}{\crefalias{chapter}{appendix}}
 
 % indexing
@@ -78,7 +80,9 @@
 \include{preface}
 
 \part{Project overview}
+\include{overview}
 \include{architecture}
+\include{other-software}
 
 \part{System Components}
 \include{comp-cpp-api}
@@ -87,16 +91,16 @@
 \include{comp-data-server}
 \include{comp-ranking-server}
 
+\part{Other Supproting Software}
+\include{extraction-pipeline}
+\include{somhunter-simulator}
+\include{log-analyzer}
+
 \part{Build Guide}
 \include{build}
 
 \part{Dependencies}
 \include{third-party}
-
-\part{Other Supproting Software}
-\include{extraction-pipeline}
-\include{somhunter-simulator}
-\include{log-analyzer}
 
 \bibliography{biblio} 
 \bibliographystyle{apalike}

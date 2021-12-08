@@ -1,0 +1,42 @@
+\chapter{Overview}
+\label{overview}
+
+SOMHunter tool is just the main part of the whole set of software, analyses and publications related to it. The tool itself is the main "product" that could not exist without all the work done all around it. In this chapter, we'll briefly introduce all the parts to provide a somewhat solid view of the project as a whole.
+
+\section{Timeline}
+
+\subsection{2019}
+To understand the story better, let's start from the beginning. SOMHunter started in 2019 as the first prototype tool that was designed as a quite simple tool in its core features [x]. It was implemented in the 3D engine [x] with UI done in ImGUI [x]. The main features were temporal text search based on the W2VV++ model and the Bayesian relevance feedback model. 
+\subsection{2020}
+In January 2020 we participated using this version at VBS 2020 [x] and we won. After the competition, we worked on a thorough analysis of our tool, as well as other competitors' tools [x]. All this gave us valuable feedback to work on a tool and share it with the world. Therefore we decided to port the tool's UI into a web app and we submitted it as an open-source version of our tool into ACM MM [x]. For the upcoming LSC 2020, we pushed the tool further [x]. Implementing the UI using React, adding filters and the "jump to history" feature.
+\subsection{2021}
+In 2021, we started working on a large-scale evaluation of the relevance feedback behaviour of users to model artificial users behaving like real ones We forked the tool's version to create a specific tool for data collecting for this --- we refer to this tool as SOMHunter Simulator [x]. This effort concluded in journal publication [x]. In parallel with this, we prepared the three-fold version of SOMHunter for the VBS 2021. Looking from the outside there were three tools competing at VBS 2021 --- SOMHunter, CollageHunter and SOMHunter version from 2020. But all the tools were running the same tool under the hood, just with different configurations. This was the version after the whole restructuring of the project and switch to Ember.js GUI implementation. Also, subframe querying with on-demand bitmap querying was added alongside many quality-of-life features.
+
+We're getting to the end of the story. After VBS 2021 we again processed all the logs and did the analysis. For this, we created scripts [x] that could be reused in the future. Again we participated in a post-VBS journal summarizing all the important takeaways. Moving on to LSC 2021 where we added support for the CLIP model, created a dedicated ranking server as a service for this and merged together bitmap with textual subframe querying. 
+
+\subsection{Conclusion}
+This is just a very brief timeline of the SOMHunter tool, that emphasizes out some important points. After reading this you should have a solid understanding of how all the software pieces and publications match together with the SOMHunter Video Search Tool.
+
+
+VBS2020\cref{kratochvil2020som}
+ACM OS Somhunter \cref{kratochvil2020somhunter}
+journal VBS2020\cref{lokovc2021reign}
+LSC2020\cref{mejzlik2020somhunter}
+VBS2021\cref{vesely2021somhunter}
+journal VBS2021\cref{journalvbs2021}
+journal RF \cref{journalRF}
+LSC2020\cref{lokovc2021enhanced}
+
+
+\section{Publications}
+
+\begin{enumerate}
+	\item \textbf{SOM-Hunter: Video browsing with relevance-to-som feedback loop.} Kratochvíl, M., Veselý, P., Mejzlík, F. and Lokoč, J., 2020, January. In International Conference on Multimedia Modeling (pp. 790-795). Springer, Cham.
+	\item \textbf{SOMHunter: lightweight video search system with SOM-guided relevance feedback.} Kratochvíl, M., Mejzlík, F., Veselý, P., Soućek, T. and Lokoć, J., 2020, October. In Proceedings of the 28th ACM International Conference on Multimedia (pp. 4481-4484).
+	\item \textbf{Is the Reign of Interactive Search Eternal? Findings from the Video Browser Showdown 2020.} Lokoč, J., Veselý, P., Mejzlík, F., Kovalčík, G., Souček, T., Rossetto, L., Schoeffmann, K., Bailer, W., Gurrin, C., Sauter, L. and Song, J., 2021.  ACM Transactions on Multimedia Computing, Communications, and Applications (TOMM), 17(3), pp.1-26.
+	\item \textbf{SOMHunter for lifelog search.} Mejzlík, F., Veselý, P., Kratochvíl, M., Souček, T. and Lokoč, J., 2020, June. In Proceedings of the Third Annual Workshop on Lifelog Search Challenge (pp. 73-75).
+	\item \textbf{SOMHunter V2 at Video Browser Showdown 2021.} Veselý, P., Mejzlík, F. and Lokoč, J., 2021, June. In International Conference on Multimedia Modeling (pp. 461-466). Springer, Cham.
+	\item \textbf{Interactive Video Retrieval Evaluation at a Distance} Peška, L., Vomlelová, M., Veselý, P., Škrhák, V. and Lokoč, J., 2022 January.
+	\item \textbf{Evaluating a Bayesian-like Relevance FeedbackModel with Text-to-Image Search Initialization} 
+	\item \textbf{SOMHunter for lifelog search.} Mejzlík, F., Veselý, P., Kratochvíl, M., Souček, T. and Lokoč, J., 2020, June. In Proceedings of the Third Annual Workshop on Lifelog Search Challenge (pp. 73-75).
+\end{enumerate}
