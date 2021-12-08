@@ -1,3 +1,20 @@
-\section*{Introduction}
+\chapter{Prerequisites}
+\section{Known-Item Search (KIS)}
+The known-item search problem is defined as follows; a user is looking for a specific scene in a large video dataset. As an example, imagine yourself looking for a video you saw on some video streaming platform, but you don't remember the name. Or some of your friends are describing to you some specific funny moment they remember. That's the moment where the SOMHunter tool comes in to help. 
 
-SOMHunter is ...
+\section{Ad-hoc video search (AVS)}
+The AVS problem, its definition says that a user is looking for all scenes matching his description. Therefore there is more than one correct answer to such a task. Imagine, you're looking for all the scenes where a dog rides a bike for example.
+
+\chapter{Introduction}
+
+SOMHunter is a prototype of an interactive video search tool designed specifically for known-item search (KIS) problems and is also well usable for Ad-hoc video search (AVS). Also in the past two years, SOMHunter competed in two Video Browser Showdown (VBS) sessions (2020, 2021), where we scored first and second places, respectively, in KIS tasks. On top of that, we took part in two Lifelog Search Challenges (LSC) (2020, 2021) where we managed to place ourselves as the second-best tool both of the times.
+
+The tool features some powerful tools for the end-user to employ, but in a way that even novice users can grasp them in little time. Such concepts are natural language text search or similar frame "liking". Both of these concepts are well-known for the vast majority of users. Moreover,  SOMHunter offers other advanced features as well. Those are primarily meant for expert users, but at the same time don't stand in a way of novice users in any way.
+
+SOMHunter is implemented as a modular cross-platform application with its user interface as a web application. Thanks to the web-based UI, the tool can also run in a setup where all parts run on a performant remote server and the end-user just uses it as a web app on a given URL. This is actually how we used SOMHunter in the last VBS and LSC competitions. Or you can run all the parts on your machine or an arbitrary combination of local and remote running parts.
+
+\begin{figure}[b]
+	\centering
+	\includegraphics[width=0.7\textwidth]{img/somhunter-logo.png}
+	\label{fig:sh-arch}
+\end{figure}
