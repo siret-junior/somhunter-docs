@@ -40,6 +40,8 @@
 \usepackage{etoolbox}
 \usepackage{fancyvrb}
 \usepackage{animate}
+\usepackage{caption}
+\usepackage{subcaption}
 
 \lstset{basicstyle=\ttfamily,
 	showstringspaces=false,
@@ -75,17 +77,18 @@
 
 %%% Each chapter is kept in a separate file
 
-\input{preface}
+\include{preface}
 
-\input{start}
+\include{interface}
+\include{usage}
 
 \bibliography{biblio} 
 \bibliographystyle{apalike}
 
 \printindex
-\begin{appendices}
+% \begin{appendices}
 
-\end{appendices}
+% \end{appendices}
 
 
 \end{document}
