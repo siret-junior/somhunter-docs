@@ -34,13 +34,13 @@ As you can see, you can use natural language sentences to construct the queries.
 \subsection{Canvas Query}
 \begin{figure}[h]
 	\centering
-  \begin{subfigure}[b]{0.5\textwidth}
+  \begin{subfigure}[b]{0.45\textwidth}
       \centering
       \includegraphics[width=\textwidth]{img/canvas-1.png}
       \caption{\textbf{Constructing the first canvas query.}}
   \end{subfigure}
   \hfill
-  \begin{subfigure}[b]{0.5\textwidth}
+  \begin{subfigure}[b]{0.45\textwidth}
       \centering
       \includegraphics[width=\textwidth]{img/canvas-2.png}
       \caption{\textbf{Constructing the second canvas query.}}
@@ -56,26 +56,92 @@ To place a bitmap, just paste it from your clipboard by hitting Control+V (most 
 
 To place s text, hit the green plus button or do Shift + Left mouse click to the canvas. The textual input will appear. Just fill in the textual query, place and scale it as you require.
 
+
+There are also some priorities in different query types for cases where (potentially) all the queries are used. The canvas query has a higher priority than the plain text query but is lower than query relocation. 
+
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Query Relocation}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{img/relocation.png}
+  \caption{\textbf{Relocation popup window.}}
+	\label{fig:relocation}
+\end{figure}
+
+As an addition to other query-constructing methods, query relocation is primarily designed to make your current query more specific. Upon clicking on the arrow button under the textual inputs, you are prompted with a small grid of frames (see~\cref{fig:relocation}) where you can select the one that is the closest to what you are looking for.
+
+
+To like a frame, just hover your mouse over it and click it with the left mouse button. Frames that are liked will have a green border around them and liked frames will also appear in liked panel (see figure).
+
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Likes}
 
-%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Filters}
+SOMHunter has a relevance feedback model built in. That means that you can mark an arbitrary number of frames as "liked". After the next rescore, scores will be recomputed so they fit the feedback you have provided. This is an essential tool to solve difficult tasks. With this, you can iteratively get to the part of the database that you are interested in.
+
+\begin{figure}[h]
+	\centering
+  \begin{subfigure}[b]{0.4\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{img/liked-frame.png}
+      \caption{\textbf{Liked frames are marked as a wide green border.}}
+      \label{fig:likes-a}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.55\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{img/likes-panel.png}
+      \caption{\textbf{Panel showing currently liked frames.}}
+      \label{fig:likes-b}
+  \end{subfigure}
+	
+  \caption{\textbf{Liking UI features.}}
+	
+\end{figure}
+
+To like a frame, just hover your mouse over it and click it with the left mouse button. Frames that are liked will have a green border around them (see~\cref{fig:likes-a}) and liked frames will also appear in liked panel (see ~\cref{fig:likes-b}).
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Filters}
+Filters are only available while working on certain datasets (e.g. Lifelog Search Challenge dataset). Such datasets contain also metadata based on what you can prune the frames that do not match the filters.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{img/filters.png}
+  \caption{\textbf{Filtering UI panel.}}
+	\label{fig:filters}
+\end{figure}
+
+As you can see on the figure, you can specify a year interval, hour interval and days in the week that the target scene belongs to. This is a hard filter therefore be careful with it so you don't filter out the scenes that may be the target. If frames are outside of the range of the filters they will never appear in the views (displays).
+
+
+%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Whenever you are happy with your query, you have to ask the system to process it and give you the results based on your query. In case you used only the liking feature, the queries will accumulate and the previous state won't be reset. This is useful for iteratively getting closer to the target scene during difficult tasks.
+
+To re-score, just hit one of the three buttons on rescore panel (see figure). All of them do the same rescore, they differ only in what display will be directly presented to you. 
+The first one goes to a top-scored grid of frames. This is great for finding visually distinctive frames that are easy to spot.
+
 \subsection{Rescoring}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{img/rescore-buttons.png}
+  \caption{\textbf{Rescoring buttons.}}
+	\label{fig:rescore}
+\end{figure}
+
+The second one goes to top-scored rows, where every row is just one result with the frame in the middle and its context before and after. This is a great view for catching scenes with some actions in them rather than just isolated frames.
+
+The third one goes to the self-organized map display. This one is great for giving you a broader view of the database. For example when you're looking for some frames to like.
+
+Each of the buttons has also the "V" button. That is because there are currently two textual models running in parallel. You can choose whether to use the default one (CLIP model) or the W2VV++ model. In some cases, they nicely complement each other so it may be helpful to try both of them. Please be aware that the CLIP model works only on plain text queries. The rest of the query types are handled by the W2VV++ model by default (likes as well).
+
+After you re-score, the desired view is displayed to you. After that, you can switch between the views (displays) as you wish. While doing that you can keep your eyes peeled to spot some good frames to like.
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Displays}
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{History}
-
-%% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Likes}
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \paragraph{Bookmarks}
