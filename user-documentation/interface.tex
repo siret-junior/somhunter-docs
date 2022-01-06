@@ -116,12 +116,12 @@ As you can see on the figure, you can specify a year interval, hour interval and
 
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Rescoring}
 Whenever you are happy with your query, you have to ask the system to process it and give you the results based on your query. In case you used only the liking feature, the queries will accumulate and the previous state won't be reset. This is useful for iteratively getting closer to the target scene during difficult tasks.
 
 To re-score, just hit one of the three buttons on rescore panel (see figure). All of them do the same rescore, they differ only in what display will be directly presented to you. 
 The first one goes to a top-scored grid of frames. This is great for finding visually distinctive frames that are easy to spot.
 
-\subsection{Rescoring}
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.6\textwidth]{img/rescore-buttons.png}
@@ -138,16 +138,116 @@ Each of the buttons has also the "V" button. That is because there are currently
 After you re-score, the desired view is displayed to you. After that, you can switch between the views (displays) as you wish. While doing that you can keep your eyes peeled to spot some good frames to like.
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
 \subsection{Displays}
+
+Displays are different views of the current distribution of scores. In other words, switching displays does not modify the query or scores in any way. 
+There are multiple displays to offer you a variety of different approaches.
+The general grid views are accessible through the panel (see~\cref{fig:display-buttons}) and the rest of them are on the frame overlay (see~\cref{fig:frame-overlay}).
+
+\begin{figure}[h]
+	\centering
+  \begin{subfigure}[b]{0.6\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{img/view-buttons.png}
+      \caption{\textbf{Buttons to switch to the three main displays.}}
+      \label{fig:display-buttons}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.35\textwidth}
+      \centering
+      \includegraphics[width=\textwidth]{img/frame-overlay.png}
+      \caption{\textbf{Frame overlay showed on mouse hover.}}
+      \label{fig:frame-overlay}
+  \end{subfigure}
+	
+  \caption{\textbf{UI elements related to changing views.}}
+	
+\end{figure}
+
+Always remember that the Esc key closes any popups that may apear. That is the fastest way to close them.
+
+\pagebreak
+\subsubsection{Top-scored Display}
+This display (see~\cref{fig:top-display}) just shows you a grid of frames that currently have the highest scores. Ordered from the one with the highest score to the lowest. Use this display to look for visually distinct frames that are easy to spot.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\textwidth]{img/top.png}
+  \caption{\textbf{An example of top-scored display.}}
+	\label{fig:top-display}
+\end{figure}
+
+\pagebreak
+\subsubsection{Top-scored Context Display}
+This display is the extension of the top-scored display. It basically shows the same top-scored frames, but puts them into the context (see~\cref{fig:top--context-display}). That means that each row is just one result where the frame itself is in the middle column and you can see the frames that preceded and those which succeeded. This is a great tool to browse for shots with some chronological progress.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\textwidth]{img/top-context.png}
+  \caption{\textbf{An example of a top-scored context display.}}
+	\label{fig:top--context-display}
+\end{figure}
+
+\pagebreak
+\subsubsection{SOM Display}
+This display is based on self-organizing map and thus clusters together similar frames (see~\cref{fig:som-display}). It is a great tool to give you a broader view to the distribution of current dataset scores. You can switch here to find good example frames to like and provide valuable feedback to the model.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\textwidth]{img/som-display.png}
+  \caption{\textbf{An example of a SOM display.}}
+	\label{fig:som-display}
+\end{figure}
+
+\subsubsection{Nearest Neighbours Display}
+You can show nearest neighbour frames for each of the frames in the dataset. This display shows exactly what it says. No catches here. To show nearest neighbours just click the "k-NN" button on the frame overlay (see~\cref{fig:frame-overlay}).
+
+\pagebreak
+\subsubsection{Video Detail}
+Often you need to inspect the whole video to see if it's the one you're looking for. Just click the "Detail" button on the frame overlay and the video detail window will show up. It shows all dataset frames from the given video. The frame with a red border is the one you jumped to this window through.
+
+Once you inspected some video like this, all the frames from this video will get a slight fadeout so you can clearly see what frames are of smaller importance since you already inspected them. This effect is reset when the search is reset (see~\cref{par:reset}).
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\textwidth]{img/detail-window.png}
+  \caption{\textbf{An example of a detail window.}}
+	\label{fig:detail-window}
+\end{figure}
+
+\subsubsection{Video Replay}
+Whenever you need to just see the wider context to the frame you are seeing, you can Shift + Mouse Wheel on top of that screen to scroll through its frames (see~\cref{fig:replay-overlay}). The frame with a red border is the one you started the replay through.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1.0\textwidth]{img/replay-overlay.png}
+  \caption{\textbf{An example of a replay slider.}}
+	\label{fig:replay-overlay}
+\end{figure}
+
+\subsubsection{Zoom Display}
+Sometimes we need to see some details in the frame. Just click the magnifying glass icon on its overlay or Shift + Left click it. This will show the zoomed version of the frame (see~\cref{fig:zoom}).
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\textwidth]{img/zoom.png}
+  \caption{\textbf{An example of a zoomed frame.}}
+	\label{fig:zoom}
+\end{figure}
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{History}
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\paragraph{Bookmarks}
+\subsection{Bookmarks}
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Other Utilites}
+\paragraph{Reset Search}
+\label{par:reset}
+To reset the search, just click the "Reset the search" button in the top left part of the screen.
+
 \paragraph{Submit to the Competition Server}
 
 \paragraph{Relog to the Competition Server}
