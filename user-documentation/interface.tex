@@ -143,7 +143,7 @@ After you re-score, the desired view is displayed to you. After that, you can sw
 
 Displays are different views of the current distribution of scores. In other words, switching displays does not modify the query or scores in any way. 
 There are multiple displays to offer you a variety of different approaches.
-The general grid views are accessible through the panel (see~\cref{fig:display-buttons}) and the rest of them are on the frame overlay (see~\cref{fig:frame-overlay}).
+The general grid views are accessible through the panel (see~\cref{fig:display-buttons}) and the rest of them are on the frame overlay (see~\cref{fig:frame-overlay}). The numbers in the top left corner of the overlay indicate video ID, shot ID and frame number respectively.
 
 \begin{figure}[h]
 	\centering
@@ -238,9 +238,29 @@ Sometimes we need to see some details in the frame. Just click the magnifying gl
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{History}
+From time to time it may come handy to "go back in time" (for example you reformulate your query in a way that the previous one was better). At any time, you can jump back to any search state you were in. That means that every re-score creates checkpoint of that state in that time. Whenever you switch to any history point, you can change displays as you wish. You can even add relevance feedback to that state and continue from it. The new point will be added to the top of the stack. The chechpoints are accessible from the history panel (see~\cref{fig:history}) by just clicking on them.
+
+History is reset with the search reset.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{img/history-panel.png}
+  \caption{\textbf{History panel.}}
+	\label{fig:history}
+\end{figure}
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Bookmarks}
+Bookmarks serve as a way how to store frames that you might need in the future. An example of such a situation is when you're not sure that what you found is the correct one. You can bookmark a frame by clicking a star icon on a frame overlay (see~\cref{fig:bookmarks}). 
+
+Bookmarks are reset with the reset, just as history is.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\textwidth]{img/bookmarks-panel.png}
+  \caption{\textbf{Bookmarks panel.}}
+	\label{fig:bookmarks}
+\end{figure}
 
 %% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Other Utilites}
@@ -249,8 +269,12 @@ Sometimes we need to see some details in the frame. Just click the magnifying gl
 To reset the search, just click the "Reset the search" button in the top left part of the screen.
 
 \paragraph{Submit to the Competition Server}
+During the competition participation (e.g. LSC, VBS) you need to submit the correct segment to the competition server. Our system currently supports the DRES server and an older version VBS Server (DRES by default). 
 
-\paragraph{Relog to the Competition Server}
+To submit, just click the green "check" button in the top right corner of the frame overlay. You will get a small notification in the top right corner.
+
+\paragraph{Log in to the Competition Server}
+The system logs in to the competition server during the launch. But sometimes when there is a restart of the competition server, you need to log in again to the server. Just click the "cogwheel" button at the bottom of the left panel and hit "Login to the server". After that, you should get a confirming prompt. 
 
 
 
