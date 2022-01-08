@@ -1,6 +1,7 @@
-# SOMHunter tool documentation
+# SOMHunter Documentation
+User and developer documentation for the [SOMHunter](https://github.com/siret-junior/somhunter) project.
 
-## Installing LaTeX
+## Build with Docker
 
 Use a Docker container with TeX. You can either build the image yourself from the supplied `Dockerfile`:
 ```sh
@@ -13,10 +14,10 @@ Or get prebuilt one:
 ```sh
 docker pull aergus/latex
 ```
-## Building with the container
+
 Now you should be able to compile the PDFs with these :
 ```sh
-docker run -u $UID -ti --rm -v ${PWD}:/workdir -w /workdir somhunter-docs/latex make
+docker run -ti --rm -v ${PWD}:/workdir -w /workdir somhunter-docs/latex make
 # OR
-docker run -u $UID -ti --rm -v ${PWD}:/workdir -w /workdir aergus/latex make
+docker run -ti --rm -v ${PWD}:/workdir -w /workdir aergus/latex make
 ```
