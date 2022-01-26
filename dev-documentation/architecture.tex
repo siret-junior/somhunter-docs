@@ -34,11 +34,11 @@ More on that in~\cref{comp-ui}.
 
 Over the years we concluded that the frames from the dataset are hard drive intensive and their size can grow in the future. Therefore this component provides an opportunity to move these frames on a remote server, where the frames may be saved and requested on demand. 
 
-More on that in~\cref{comp-data-server}.
+Our implementation is rather simple yet efficient. It is a node.js server that serves the data directory read from the core config.
 
 \section{Ranking Server}
 
-The latest trends in content-based video retrieval show us the importance of deep learning models employment. These models usually provide some semantic similarity rankings which are necessary for successful searches. Unfortunately, these models may require a different runtime environment such as programming language, framework or hardware demands (i.e. GPUs). On top of that, it is crucial to keep up with the newest versions to achieve state-of-the-art performance. Therefore we separated the main ranking into a single component that implements a simple API and takes care of the necessities described before.
+The latest trends in content-based video retrieval show us the importance of deep learning models employment. These models usually provide some semantic similarity rankings which are necessary for successful searches. Unfortunately, these models may require a different runtime environment such as programming language, framework or hardware demands (e.g. GPUs). On top of that, it is crucial to keep up with the newest versions to achieve state-of-the-art performance. Therefore we separated the main ranking into a single component that implements a simple API and takes care of the necessities described before.
 
 More on that in~\cref{comp-ranking-server}.
 
