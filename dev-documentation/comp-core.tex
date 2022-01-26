@@ -4,40 +4,39 @@
 In this chapter we'll take a closer look at the core component and it's important parts.
 
 \section{SOMHunter HTTP API}
-That it just "translates" HTTP requests to C++ calls and vise versa with returned values.
 
-\subsection{Endpoints \& OpenAPI}
-What endpoints are supported? We are OpenAPI complaint.
-
-\subsection{Implementation}
-Describe why cpprestsdk...
-
-https://github.com/microsoft/cpprestsdk
-
-\subsection{Discussion on Implementation}
-
-\paragraph{Pros}
-\begin{itemize}
-	\item + It is cross platform.
-\end{itemize}
-
-\paragraph{Cons}
-\begin{itemize}
-	\item - Has it's own JSON lib.
-	\item + Not actively developed anymore.
-\end{itemize}
-
-
+We will start with an HTTP API that maps HTTP requests to function calls on the somhunter instance. This layer is implemented in cpprestsdk~\footnote{https://github.com/microsoft/cpprestsdk}. The endpoint definitions are defined in \path{./config/config-api.json} and the definition is OpenAPI 3.0.0. The swagger browser of endpoints is prepared in \path{./docs/api/index.html}. To explore current API specification access to \url{http://DOMAIN:PORT/api/config}. With the default settings on the localhost, it should be \url{http://localhost:8082/api/config}. We've chosen this library because of the MIT license and portability. Other libraries usually are not portable across different OS or have a different license.
 
 \section{C++ API}
 
+The main class of somhunter, that hold the state and provides API for its manipulation is \lstinline{SomHunter}. The object of this class has to be constructed with the path to the core config file (usually \path{./config/config-core.json}). After the construction, the object is prepared for the search sessions. One of the first things, the API provides, is the display generation with function \lstinline{get_display}. This function requires the display type, which is an enumeration of supported display types. The next parameter is the id of a target image. This parameter is required only for some displays like nearest neighbours displays or video detail. The next parameter is page number and is required only for displays, that support paging (e.g. top-scored, nearest neighbours). The last parameter is rather a technical one for disabling logging. The next important function is the function for saving "liked" frames for the bayesian update. The function declaration is \lstinline{std::vector<bool> like_frames(const std::vector<FrameId>& new_likes)}. It receives ids of selected frames and returns their selection status (liked/not liked). Similarly, the function \lstinline{bookmark_frames} does the same thing for bookmarked frames. The function that moves the search forward as it is the only one that changes the scoring of the dataset is the function \lstinline{RescoreResult rescore(Query& query, bool benchmark_run = false)}. It accepts the Query struct and updates accordingly the scoring. At first, it goes through the temporal queries and updates scores based on the query type. The second step merges all the scorings to create global dataset scores and normalizes the results. Then it applies filters if they are present. The last score updating step is the bayesian update function. If any of the steps get the same input as in the previous iteration, it will be skipped. Lastly, the som computation is started and user and search contexts are updated. The functions for context accessing and switching are \lstinline{switch_search_context}, \lstinline{get_search_context}, \lstinline{get_user_context}, and \lstinline{reset_search_session}. When we would like to get information about a frame or interval of frames, such as a path to the frame, we would use functions as \lstinline{get_frame}, \lstinline{get_frames}, or \lstinline{get_frame_ptr}. The helper functions \lstinline{som_ready} retrieves a state of SOM computation (whether it is finished or not). The functions for communicating with the evaluation server are login, logout, submit, and log functions. The login and logout functions start and end sessions with the evaluation server using the secret username and password in config. The submit function (\lstinline{submit_to_eval_server}) submits the frame with the frame id to the evaluation server as the target frame. Lastly the log functions (\lstinline{log_video_replay}, \lstinline{log_scroll}, \lstinline{log_text_query_change}, and \lstinline{log_canvas_query_change}) provides to user interface to log the user interactions. The other functions in this API are mostly for benchmarking purposes and are not useful for the basic search with interactive UI.
+
 \section{Current Settings}
 
-\section{Loaded Dataset}
+The SOMHunter core settings are stored in usually in \path{./config/config-core.json} in the JSON format. The struct representation of this file is \lstinline{struct Settings}. The settings are split into eight sections.
+\begin{itemize}
+  \item Dataset -- Contains information about the dataset such as a path to images, image features, keywords and their features, and additional filename parsing information. 
+  \item Models -- Holds paths to the machine learning models for feature extraction.
+  \item Remote services -- There are addresses to the external services such as media server or remote ranking service.
+  \item Evaluation server -- The connection and authentication settings for the evaluation server are stored here.
+  \item API -- Contaithe sons information about on what port somhunter is running and where are the OpenAPI specification.
+  \item Logger -- The logging settings are stored in this section.
+  \item Presentation views -- Set the parameters for the static presentation filters (e.g. max frames per shot/video).
+  \item Tests -- Contain settings for test and benchmark use cases.
+\end{itemize}
+
+\section{Dataset}
+
+The data about dataset are loaded in two structures: \lstinline{class DatasetFrames} and \lstinline{class FrameFeatures}. The first one takes care of data about each frame such as their filename, video and shot from which is it and additional LSC information. It also provides an interface for accessing the data in form of each video frame or all frames from a given video. The \lstinline{FrameFeatures} takes care of latent representation of the frames and computing distance on these features. This class is template parametrized by the feature settings to not mix up multiple features (e.g. primary vs secondary frame features). 
 
 \section{Rankers}
 
+Ranker is an object that updates the score vector of the dataset accordingly to the query. The query can be anything from a plain text query to a localized image on a canvas. The implemented rankers are \lstinline{CanvasQueryRanker}, \lstinline{KeywordClipRanker}, \lstinline{KeywordRanker}, and \lstinline{RelocationRanker}. The scores are persisted in \lstinline{ScoreModel} which supports additional helper functions for better manipulation with score vector.
+
+\section{User And Search Context}
+
+The user and search contexts stores the state of the searches and static information about the dataset. The user context contains static information which does not change during searching such as dataset frames, frames features, logger, pointers to SOM workers, and full search context as the search history. The search context holds information about a single search step. In this context is stored: query used, shown frames, likes applied, current score vector, and current display type. For each rescore a new search context is added to the user context.
+
 \section{Other Services}
 
-\section{User Search Context (State)}
-
+One of the supporting other services is the \lstinline{Logger}. This class takes care of all the logging to the evaluation server. Every query change, rescore action, context switch, and other interactions have to be logged to the evaluation server to perform subsequent analysis. 

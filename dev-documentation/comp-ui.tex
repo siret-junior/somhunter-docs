@@ -1,3 +1,20 @@
 \chapter{UI}
 \label{comp-ui}
 
+In this chapter, we will go through the UI module and describe its parts. The UI is implemented in the Ember.js framework. It provides us with the possibility to structure code nicely and avoid a lot of boilerplate.
+
+\section{Components}
+
+A component is a part of the UI with functionality. Each component has its template and controller. The controller reacts to the registered events and even can fire new ones. The change of attributes in the controller is promoted to the template which can change accordingly to the new state. The components can use other components or simple HTML elements to achieve the desired result. 
+
+\section{Action Manager}
+
+The action manager implements communication with all the services which provides SOMHunter. Each function can be called from any controller and the action manager produces events and calls to fulfil the purpose. Every change of display or rescore goes through the action manager which calls the appropriate endpoint in lower-level API and after completion produces an event to signal fulfiled request.
+
+\section{Core API}
+
+This lower-level API provides a function for each endpoint call with given parameters. This layer is used by the action manager and it receives all the information needed to perform the request. The returned data from the request are parsed and saved in the Ember.js store for further processing.
+
+\section{Data Loader}
+
+The data loader is a layer that provides access to the stored data in the Ember.js store. This service can be called from the action manager or directly from the controller of a component to visualize some information.
