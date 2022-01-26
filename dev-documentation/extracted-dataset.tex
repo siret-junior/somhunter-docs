@@ -2,4 +2,29 @@
 \label{extracted-dataset}
 
 
-Describe the formats of the files.
+The extracted dataset is a file structure that is produced by the extraction pipeline. The dataset is divided into four parts. The first part is the directory \path{media} with the selected frames. These frames are saved as jpg images in two resolutions. The first resolution is a thumbnail version of the original frame in resolution 320x180 and they are located in directory \path{media/thumbs}. The second version is the image with a higher resolution of 1024x576 for better detail preservation. These high-resolution images are located in \path{media/frames}. The next part of the dataset is a sorted list of all images \path{frame-ID-to-filepath.csv}. Additionally, there can be another supplementary file with LSC metadata \path{selected-frames-metadata.LSC.csv}. The third and fourth parts are the extracted deep features called primary and secondary. The primary features are extracted from the w2vv++ text-to-image model. The matrix with frame features is stored in binary file \path{frame-features.ITEC.W2VV.628x128.float32.bin} where each row is a 128-dim feature vector of an image. These features were reduced by PCA. The PCA matrix and PCA mean are stored in binary files \path{PCA-matrix.ITEC.W2VV-BoW.2048x128.float32.bin} and \path{PCA-mean.ITEC.W2VV-BoW.2048.float32.bin} respectively. All the float matrices are stored in float32 format. The keyword embeddings are stored in the matrix \path{keyword-dense-weigths.W2VV-BoW.11147x2048.float32.bin} and its bias is in \path{keyword-dense-bias.W2VV-BoW.2048.float32.bin}. The vocabulary of embeddings with the precomputed list of most similar images is stored in the text file \path{keyword-to-ID.W2VV-BoW.csv}. Lastly, there is a directory \path{subframes}, which contains deep features similar to the previous ones in \path{PCA-matrix.ITEC.W2VV-BoW.2048x128.float32.bin}, but they were extracted only on the smaller cuts of image. These subframe features are used for canvas querying. The secondary features are extracted from the CLIP text-to-image model. Due to the time-demanding extraction and distance computation, we use only whole frames features. 
+
+\begin{minipage}{\linewidth}
+
+Example file structure:
+
+\begin{lstlisting}
+.
+|-- frame-ID-to-filepath.LSC.csv
+|-- media
+|   |-- frames [114 entries exceeds filelimit, not opening dir]
+|   `-- thumbs [114 entries exceeds filelimit, not opening dir]
+|-- primary
+|   |-- frame-features.LSC.W2VV.183307x128.float32.bin
+|   |-- keyword-dense-bias.W2VV-BoW.2048.float32.bin
+|   |-- keyword-dense-weigths.W2VV-BoW.11147x2048.float32.bin
+|   |-- keyword-to-ID.W2VV-BoW.csv
+|   |-- PCA-matrix.V3C1.W2VV-BoW.2048x128.float32.bin
+|   |-- PCA-mean.V3C1.W2VV-BoW.2048.float32.bin
+|   `-- subframes [12 entries exceeds filelimit, not opening dir]
+|-- secondary
+|   `-- frame-features.LSC.CLIP.183307x640.float32.bin
+`-- selected-frames-metadata.LSC.csv
+
+\end{lstlisting}
+\end{minipage}
