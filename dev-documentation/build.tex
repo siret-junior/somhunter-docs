@@ -1,2 +1,41 @@
 \chapter{Build instructions}
 \label{build}
+
+In this chapter, we will go through a build process of the main SOMHunter application. There will be presented two methods.
+
+\section{Using Docker}
+
+The easier build solution is via docker~\footnote{https://docs.docker.com/get-docker/} and docker-compose~\footnote{https://docs.docker.com/compose/install/}. Together with git~\footnote{https://git-scm.com/book/en/v2/Getting-Started-Installing-Git}, these are the only prerequisites for the build. Build steps:
+
+\begin{enumerate}
+  \item Clone SOMHunter repository
+  \item \lstinline{sudo sh install-docker.sh RelWithDebubInfo}
+  \item \lstinline{sudo docker-compose up}
+\end{enumerate}
+
+After everything is finished the UI of the application is running on address \url{http://localhost:8080}.
+
+\section{Manual Build}
+
+The manual build is harder because you have to get many prerequisites manually. This is the complete list of all prerequisites:
+
+\begin{itemize}
+  \item All the packages from \lstinline{build-essential}
+  \item Git~\footnote{https://git-scm.com/book/en/v2/Getting-Started-Installing-Git}
+  \item Python3~\footnote{https://www.python.org/downloads/} with alias python and urllib3 installed
+  \item Node.js~\footnote{https://nodejs.org/en/} and npm~\footnote{https://www.npmjs.com/}
+  \item Ember.js~\footnote{https://guides.emberjs.com/release/getting-started/quick-start/}
+  \item libcurl~\footnote{https://curl.se/libcurl/}
+  \item OpenCV~\footnote{https://opencv.org/}
+  \item cpprestsdk~\footnote{https://github.com/microsoft/cpprestsdk}
+\end{itemize}
+
+Build steps:
+
+\begin{enumerate}
+  \item Clone SOMHunter repository
+  \item Run main install script which calls recursively other install scripts \lstinline{sh install.sh RelWithDebugInfo}
+  \item Start all the parts \lstinline{sh run.sh}
+\end{enumerate}
+
+Now we will describe the installation scripts in each project. The ranking server creates Python virtual environment and installs all the requirements in the \path{requirements.txt}. The data server and its dependencies from \path{package-lock.json} are installed and built by npm. Similarly, the UI's dependencies are installed and built by npm and then the UI is built by the ember extension. Finally, the core is built using CMake.
