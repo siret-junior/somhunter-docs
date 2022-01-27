@@ -2,4 +2,26 @@
 \label{somhunter-simulator}
 
 
-https://github.com/siret-junior/somhunter-simulator
+SOMHunter simulator is a framework for offline interactive search simulation. The search flow is similar to the one in SOMHunter except the user browsing is limited to only bayesian browsing. The usual interactive search loop starts with a text query, followed by the first display and then the user selects as many frames most similar to the target frames as the user want. Then the process continues again from the display generation until the object is found or the user gives up.
+
+\section{Initialization}
+
+The search starts usually with a text query. The text query is processed by an initializer which outputs a score vector. These initializers are in module \lstinline{initializers}. The implemented \lstinline{BoWInitializer} uses the same W2VV++ BOW model as in the SOMHunter. This initialization can be omitted and we can use a vector with only ones to simulate no text query.
+
+\section{Display Generation}
+
+The display generation methods are implemented in the module \lstinline{displays}. These methods take the score vector and output indexes of frames that should be shown to the user. The \lstinline{TopNDisplay} method picks n frames with the highest scores. The \lstinline{RanSamDisplay} samples frames from the distribution. The last method \lstinline{SOMDisplay} computes SOM on the data and from each cluster selects a weighted random representant. 
+
+\section{User Simulation}
+
+In the next step in SOMHunter, the user usually starts browsing on the prepared display. Because we would like to run an offline simulation we need to approximate this step. From the data gathered in the user study~\cite{peska2021}, we created multiple user approximations. These implementations take ids of the frames and output a subset of ids that they represent "likes". These models usually need additional data and thus most of them are saved as \lstinline{.pickle} in directory \path{./pickle}.
+
+\section{Ranking}
+
+After the simulated user selects "likes", the scores should be updated accordingly. These update methods are implemented in the module \lstinline{rankers}. The class \lstinline{BayesianRanker} implements the basic bayesian update method used in the SOMHunter.
+
+\section{Simulations}
+
+For the experiments used in the study~\cite{peska2021}, we prepared three evaluation scenarios. The first scenario is implemented in \lstinline{run_simulations.py}. In this scenario, we used input file \path{./data/study_targets.csv} and for each row, we simulated the same search. Each row was created from the collected user data and holds information about the target image, the text query,  the number of search iterations, the display type, and how many "likes" did the user selected. The output is a similar file with an additional column with information on when was the target found in the simulation. This simulation is not entirely fair to the simulated user and thus we created another scenario, where only one search iteration was taken in count. This scenario is implemented in \lstinline{first_step_validation.py}. When we validated the user approximations we tried to find new search strategies and setups and thus we prepared the last scenario \lstinline{strategy_search.py}. The input for the last scenario was CSV files \path{annotations.csv}, \path{annotations2.csv}, and \path{annotations3.csv}.
+
+
