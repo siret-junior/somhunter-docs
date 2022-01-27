@@ -2,4 +2,6 @@
 \label{extraction-pipeline}
 
 
-The extraction pipeline is an offline component for video features extraction. We reused the existing extraction pipeline~\footnote{https://github.com/soCzech/viret-pipeline} which was created for another tool called VIRET. The pipeline is configurable by \path{config.yaml}. The \lstinline{frame_provider} cuts frames from the provided videos. Another part is \lstinline{frame_processing}. This part lists classes that compute on all frames. Then the \lstinline{keyframe_provider} selects keyframes from the computed data. Finally, the \lstinline{feature_extraction} takes the selected data and creates frame features from them. Example configurations used for competitions are \path{config.yaml} and \path{config-lsc.yaml}.
+The extraction pipeline is an offline component for video features extraction. We reused the existing extraction pipeline\footnote{https://github.com/soCzech/viret-pipeline} which was created for another tool called VIRET. The pipeline is configurable by \path{config.yaml}. 
+
+The \lstinline{frame_provider} cuts frames from the provided videos. Another part is \lstinline{frame_processing}. This part lists classes that compute on all frames. Then the \lstinline{keyframe_provider} selects keyframes from the computed data. Finally, the \lstinline{feature_extraction} takes the selected data and creates frame features from them. Example configurations used for competitions are \path{config.yaml} and \path{config-lsc.yaml}.

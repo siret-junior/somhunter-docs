@@ -7,10 +7,10 @@ When we say SOMHunter, we usually mean the main part of the project --- as visua
 Currently, SOMHunter has four separated parts --- \emph{Core}, \emph{UI}, \emph{data server} and \emph{ranking server}.
 
 
-\begin{figure}[b]
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=1.0\textwidth]{img/diagrams/sh-arch.pdf}
-	\caption{\textbf{High-level architecture of the SOMHunter tool.} Showing also extraction pipeline and visualising the path of the input dataset. {\color{red}Je k tomu nekde link/tikz src?}}
+	\caption{\textbf{High-level architecture of the SOMHunter tool.} Showing also extraction pipeline and visualising the path of the input dataset.}
 	\label{fig:sh-arch}
 \end{figure}
 
@@ -44,11 +44,11 @@ More on that in~\cref{comp-ranking-server}.
 
 
 \section{Other Component}
-As we mentioned earlier, beside the tool itself there are other parts that are essential for the tool.
+As we mentioned earlier, besides the tool itself there are other parts that are essential for the tool.
 
 \subsection{Extraction Pipeline}
 
-The extraction pipeline is an offline component. It takes the videos from the dataset and selects representative frames from them. The boundary detection models are employed to cut videos into the scenes from which we select only some frames to reduce redundancy. Then an image metadata are extracted from these selected frames. In the end, the pipeline creates directories with selected frames and extracted features that can be loaded to SOMHunter.
+The extraction pipeline is an offline component. It takes the videos from the dataset and selects representative frames from them. The boundary detection models are employed to cut videos into the scenes from which we select only some frames to reduce redundancy. Then image metadata are extracted from these selected frames. In the end, the pipeline creates directories with selected frames and extracted features that can be loaded to SOMHunter.
 
 More on that in~\cref{extraction-pipeline}.
 
@@ -69,9 +69,5 @@ More on that in~\cref{somcollector}.
 The interactive scoring part of the SOMHunter is the Bayesian relevance feedback algorithm. A disadvantage of an interactive algorithm is its exhausting optimization. It is mainly because every iteration of an interactive algorithm step needs a human user. The original algorithm has some parameters and if they are not set up properly, the algorithm won't produce a satisfactory result. So we would need to try many interactive searches to optimise the algorithm to sufficient settings. In this component, we mimic the user based on real-world data and provide a framework for prototyping interactive relevance feedback algorithms.
 
 More on that in~\cref{somhunter-simulator}.
-
-\subsection{Log Analyzer}
-
-More on that in~\cref{log-analyzer}.
 
 
