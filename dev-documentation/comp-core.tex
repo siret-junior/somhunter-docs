@@ -5,7 +5,7 @@ In this chapter, we'll take a closer look at the core component and its importan
 
 \section{HTTP API}
 
-We will start with an HTTP API that maps HTTP requests to function calls in the SOMHunter core instance. This layer is implemented in cpprestsdk\footnote{https://github.com/microsoft/cpprestsdk}. The endpoint definitions are defined in \path{./config/config-api.json} and the definition is OpenAPI 3.0.0. The swagger browser of endpoints is prepared and served on \url{http://DOMAIN:PORT/api/config}. With the default settings on the localhost, it should be \url{http://localhost:8082/api}. We've chosen this library because of the MIT license and portability. Other libraries usually are not portable across different OS or have a different license.
+We will start with an HTTP API that maps HTTP requests to function calls in the SOMHunter core instance. This layer is implemented in cpprestsdk\footnote{https://github.com/microsoft/cpprestsdk}. The endpoint definitions are defined in \path{./config/config-api.json} and the definition is OpenAPI 3.0.0. The swagger browser of endpoints is prepared and served on \url{http://DOMAIN:PORT/api/config}. With the default settings on the localhost, it should be \url{http://localhost:8082/api}. We've chosen this library because of the MIT license and portability. Other libraries are not usually portable across different OS or have a different license.
 
 \section{C++ API}
 
