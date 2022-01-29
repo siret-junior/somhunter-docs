@@ -1,6 +1,8 @@
 # SOMHunter Documentation
 User and developer documentation for the [SOMHunter](https://github.com/siret-junior/somhunter) project.
 
+> The pre-built version of the generated Doxygen documentation is available [here](https://siret-junior.github.io/somhunter-core/).
+
 ## Build with Docker
 
 Use a Docker container with TeX. You can either build the image yourself from the supplied `Dockerfile`:
